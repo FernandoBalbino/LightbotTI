@@ -56,3 +56,21 @@ body { min-height: 100dvh; margin: 0; overflow-x: hidden; }
 #tutorialStatus { font-size: 12px; text-align: center; }
 
 .game-run .lb-run-label { white-space: normal; font-size: 11px; line-height: 1.1; }
+
+/* The same original robot frames accompany commands in the palette and cloned program rows. */
+.command-robot-icon { overflow: visible; pointer-events: none; }
+.command-arrow, .command-arrow-outline, .command-light-rays {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.command-arrow-outline { stroke: #12343d; stroke-width: 7; }
+.command-arrow { stroke: #d4fff4; stroke-width: 3.5; }
+.command-light-rays { stroke: #ffe774; stroke-width: 3.5; }
+.command-light-tile { fill: #ffe545; stroke: #715c14; stroke-width: 2; }
+.command-jump-shadow { fill: #a8e4d1; opacity: .5; }
+#instructionsContainer .instruction-symbol { width: 46px; height: 46px; flex-basis: 46px; }
+#instructionsContainer .lb-instruction-row { min-height: 72px; padding: 5px 4px; gap: 3px; }
+#programContainer .instruction-symbol { width: 50px; height: 50px; flex: 0 0 50px; }
+#programContainer .lb-instruction-row { min-height: 60px; padding-top: 4px; padding-bottom: 4px; }
+#programContainer .lb-instruction-label { font-size: 12px; }
