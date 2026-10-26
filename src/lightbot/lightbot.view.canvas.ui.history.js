@@ -123,6 +123,10 @@ export function initHistory(app) {
 
   var initialState = window.history && window.history.state ? window.history.state : null;
   if (!initialState) initialState = hashToState(window.location.hash);
+  if (!initialState && app.storage) {
+    var last = app.storage.getItem('lastLevel');
+    if (last !== null) initialState = { page: 'gameScreen', level: Number(last) };
+  }
   if (!initialState) initialState = { page: "welcomeScreen" };
 
   safeReplaceState(initialState);

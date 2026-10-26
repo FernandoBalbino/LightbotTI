@@ -1,127 +1,58 @@
-# Lightbot
+# Lightbot TI — Desafio do Robô
 
-Lightbot is an educational puzzle game about programming and logical thinking.
+Adaptação educacional do [Lightbot de Laurent Haan](https://github.com/haan/Lightbot), para o 2º ano do Ensino Médio Técnico em Manutenção e Suporte em Informática.
 
-The player controls a small robot and must guide it to light up all blue tiles in each level.  
-Instead of moving the robot directly, you build a **program** from simple instructions  
-(move, turn, jump, light up, repeat, etc.). This makes Lightbot well-suited for
-introductory courses on algorithms, control flow, and problem decomposition.
+**Jogar:** https://fernandobalbino.github.io/LightbotTI/
 
----
+Leia a dica, programe o robô para coletar automaticamente o objeto correspondente e depois acenda todos os quadrados azuis. São os **16 mapas originais**, o mesmo robô, a mesma física e o mesmo editor com repetições aninhadas. Há exatamente três objetos por tentativa.
 
-## Play online
+## Executar localmente
 
-You can play Lightbot directly in your browser:
+Requer Node **26.12.1 ou versão 26.x compatível**, conforme `.nvmrc`, e npm **11.19.0**. Não exige servidor ou instalação nos Chromebooks dos alunos.
 
-- https://lightbot.lu
-
-No installation or account is required for the online version.
-
----
-
-## Downloading and running Lightbot locally
-
-1. Download the latest release from the Releases page.
-2. Unpack the archive.
-3. Open `index.html` in your browser (no server required).
-
----
-
-## Localization
-
-The release build is static, so you cannot add a new localization by editing files after download.
-New languages must be added in the source and released as part of the project.
-
-Translations live in:
-
-```text
-src/locales/translations.en.js
-src/locales/translations.de.js
-src/locales/translations.fr.js
+```sh
+npm ci
+npm run dev
 ```
 
-### Best practice for contributing a new language
+Para verificar e gerar as distribuições:
 
-1. Copy an existing file (for example `translations.en.js`) to a new file like `translations.it.js`.
-2. Translate only the **values** (right-hand side). Keep all keys exactly the same.
-3. Add the new language to the i18n resources in `src/lightbot/lightbot.view.canvas.ui.translate.js`.
-4. Add the language option to the language selector in `index.html`.
-5. Open a Pull Request with the new file.
+```sh
+npm test
+npm run build:web
+npm run build
+```
 
-Only Pull Requests are accepted for new translations.
+Para repetir a verificação real de navegador, com Google Chrome instalado na máquina de desenvolvimento, execute `npm run preview:web` em um terminal e `npm run qa:browser` em outro.
 
----
+`dist-web/` é a distribuição para hospedagem. `dist/` é a distribuição com JavaScript e CSS integrados ao HTML; mantenha sua pasta de imagens e mídias junto do HTML. O cache offline requer abertura por HTTP(S), como o GitHub Pages. Após o primeiro carregamento completo, o indicador **Disponível offline** confirma a preparação.
 
-## Building from source
+## Controles
 
-If you prefer to build the game yourself (or modify the code):
+- Clique em um comando ou use Enter/Espaço para adicioná-lo; arraste para reorganizar.
+- Sem arrastar: selecione uma linha, mova com ↑/↓ e use **Inserir dentro**, **Sair** e **Voltar ao programa**. Alt+↑/↓ também reorganiza.
+- **Executar → Pausar → Continuar** conserva o ponto de execução.
+- **Reiniciar** restaura robô, objetos e luzes, mantendo o programa e as posições sorteadas.
+- **Sortear novamente** cria outra distribuição válida e reinicia a tentativa, mantendo o programa.
+- **Ajuda** apresenta explicações e demonstrações em português executadas pelo motor original.
 
-1. **Clone the repository**
+## Organização
 
-   ```bash
-   git clone https://github.com/haan/Lightbot.git
-   cd Lightbot
-   ```
+- `src/lightbot/`: modelos, editor e renderizador originais, com integrações opcionais para o objetivo educativo.
+- `src/education/`: conteúdo, sorteios, coleta, persistência, renderização, acessibilidade e demonstrações.
+- `src/locales/translations.pt-BR.js`: catálogo completo em português brasileiro.
+- `public/img/items/`: 19 sprites SVG locais.
+- O canvas acompanha a área efetivamente exibida, amplia o tabuleiro sem recortá-lo e usa resolução de desenho mínima de 2×; o sprite original do robô é preservado.
+- `scripts/generate-placements.mjs`: gera rotas e conjuntos válidos diretamente dos mapas originais, sem redesenhá-los.
+- `tests/education.test.mjs`: integridade do upstream, configurações, coleta, reinício, localização e conclusão das 16 fases.
+- [Validação e limites](docs/VALIDACAO.md) e [créditos dos recursos](THIRD_PARTY_NOTICES.md).
 
-2. **Install dependencies**
+## Publicação
 
-   Install [Node.js](https://nodejs.org/) 26.12.1 or a newer 26.x release
-   and npm 11.19.0. The version in `.nvmrc` is also used by CI and release builds.
-   With nvm-windows, run `nvm install 26.12.1` and `nvm use 26.12.1`;
-   with nvm on macOS/Linux, run `nvm install` and `nvm use`.
-   Check `node --version`, then run:
+O workflow **Publicar Lightbot TI** testa, gera `dist-web/` e publica pelo GitHub Pages após cada push na branch `main`. Em Settings → Pages, a origem deve ser **GitHub Actions**. Não requer backend, banco de dados, conta do aluno nem serviço pago.
 
-   ```bash
-   npm ci
-   ```
+O progresso é local ao navegador e dispositivo. Não há sincronização de turmas. Navegação privada ou limpeza dos dados do site pode apagar o progresso; quando o armazenamento está bloqueado, a sessão continua jogável e as configurações ficam somente na memória.
 
-3. **Start the dev server**
+## Origem e licença
 
-   ```bash
-   npm run dev
-   ```
-
-4. **Build the game**
-
-   ```bash
-   npm run build
-   ```
-
-   This outputs a production build to `dist/`.
-
-5. **Run locally**
-
-   Open `dist/index.html` in your browser.
-
----
-
-## Using Lightbot in teaching
-
-Lightbot was designed with teaching in mind. Typical use cases include:
-
-- Introducing **basic programming concepts** (sequencing, loops, conditionals)
-- Practicing **algorithmic thinking** and planning
-- Comparing different solutions for **efficiency** (shorter programs vs. more steps)
-
-Teachers are free to:
-
-- Run the online version in class
-- Provide a local copy built from the Releases page
-- Fork the repository and customize levels and interface to their needs
-
----
-
-## Credits
-
-- Development: Laurent Haan  
-- Interface: Zenobia Homan  
-- Robot artwork: surt  
-- Music: hektikmusic  
-- Original Lightbot concept: https://lightbot.com/
-
----
-
-## License
-
-This project is released under the **MIT License**.  
-See the [`LICENSE`](LICENSE) file for the full license text.
+Base: `haan/Lightbot`, commit `cadfa5dff0770fa451993efa21b7da792b8d07da`. O arquivo que define os mapas permanece integralmente original. A licença MIT original está em [LICENSE](LICENSE). Créditos de Laurent Haan, Zenobia Homan, surt e hektikmusic foram preservados. A adaptação e os novos recursos autorais seguem a mesma licença, ressalvadas as marcas de terceiros.

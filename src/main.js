@@ -1,7 +1,7 @@
 // Vite entry point: create the app instance, initialize UI/i18n/history, then start the canvas render loop.
 import "./styles/main.css";
 
-var assetBaseUrl = import.meta.env.BASE_URL || "/";
+var assetBaseUrl = new URL(import.meta.env.BASE_URL || "./", document.baseURI).href;
 document.documentElement.style.setProperty("--lb-achievement-bg", 'url("' + assetBaseUrl + 'img/achievement.png")');
 ["gold", "silver", "bronze"].forEach(function (metal) {
   document.documentElement.style.setProperty("--lb-medal-" + metal + "-bg", 'url("' + assetBaseUrl + 'img/medals/' + metal + '.png")');
@@ -50,3 +50,24 @@ runWhenDomReady(function () {
     console.error("Lightbot boot failed:", e);
   });
 });
+
+// Precache all local assets, including the original demonstrations and the nineteen objects.
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', async () => {
+    const status = document.getElementById('offlineStatus');
+    try {
+      const wasControlled = !!navigator.serviceWorker.controller;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (wasControlled) window.location.reload();
+      }, { once: true });
+      const registration = await navigator.serviceWorker.register('./sw.js');
+      await navigator.serviceWorker.ready;
+      if (registration.active) status.textContent = 'Disponível offline';
+      navigator.serviceWorker.addEventListener('message', event => {
+        if (event.data === 'offline-ready') status.textContent = 'Disponível offline';
+      });
+    } catch { status.textContent = 'Online · cache offline indisponível'; }
+  });
+}
+
+import './styles/education.css';

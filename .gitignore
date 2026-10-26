@@ -37,3 +37,6 @@ coverage/
 # Local environment / secrets (if you ever add them)
 .env
 .env.*
+
+.tools/
+qa-evidence/

@@ -19,7 +19,7 @@ export function Projection(canvasHeight, offsetX, offsetY) {
 
 // Fit the entire level, with room above every tile for the robot sprite.
 // Framing depends on the level geometry, so it stays still while the robot moves.
-export function getMapFrame(map, projection, width, height) {
+export function getMapFrame(map, projection, width, height, maxScale = 1) {
   var minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
   map.getMapRef().forEach(function (column) {
     column.forEach(function (tile) {
@@ -37,7 +37,7 @@ export function getMapFrame(map, projection, width, height) {
       });
     });
   });
-  var scale = Math.min(1, (width - 48) / (maxX - minX), (height - 48) / (maxY - minY));
+  var scale = Math.min(maxScale, (width - 48) / (maxX - minX), (height - 48) / (maxY - minY));
   return {
     scale: scale,
     x: (width - (minX + maxX) * scale) / 2,

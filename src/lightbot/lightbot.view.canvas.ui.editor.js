@@ -282,7 +282,7 @@ export function createEditor(params) {
         if (!row || !palette.contains(row)) return;
         if (e.type === "keydown" && e.key !== "Enter" && e.key !== " ") return;
         e.preventDefault();
-        var list = getMainProgramList();
+        var list = editor.insertionList && editor.insertionList.isConnected ? editor.insertionList : getMainProgramList();
         if (!list) return;
         var item = row.closest("li").cloneNode(true);
         list.appendChild(item);

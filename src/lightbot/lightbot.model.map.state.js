@@ -20,5 +20,6 @@ export function createMapState(params) {
     }
   };
 
+  state.isComplete = function () { return state.allLightsOn() && (!params.education || params.education.collected); };
   return state;
 }

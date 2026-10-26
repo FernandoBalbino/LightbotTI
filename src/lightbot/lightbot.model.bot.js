@@ -191,6 +191,7 @@ export function createBot(params) {
     light: function() {
       var m = map();
       if (!m) return;
+      if (params.canLight && !params.canLight()) return;
       var tmp = m.getMapRef()[this.currentPos.x][this.currentPos.y];
       if (tmp instanceof LightBox) {
         tmp.toggleLight();
@@ -223,5 +224,14 @@ export function createBot(params) {
     }
   };
 
+  // Optional educational observer: movement rules above stay unchanged.
+  if (params.onMove) ['walk', 'jump'].forEach(function (name) {
+    var original = bot[name];
+    bot[name] = function () {
+      var before = { x: this.currentPos.x, y: this.currentPos.y };
+      original.call(this);
+      if (before.x !== this.currentPos.x || before.y !== this.currentPos.y) params.onMove(this.currentPos, before);
+    };
+  });
   return bot;
 }

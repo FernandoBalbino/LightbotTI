@@ -1,22 +1,10 @@
+import { LIGHTBOT_TRANSLATIONS_PT_BR } from '../locales/translations.pt-BR.js';
 // i18next setup and DOM translation pass for elements with `data-i18n*` attributes.
 import i18next from "i18next";
-import { LIGHTBOT_TRANSLATIONS_DE } from "../locales/translations.de.js";
-import { LIGHTBOT_TRANSLATIONS_EN } from "../locales/translations.en.js";
-import { LIGHTBOT_TRANSLATIONS_FR } from "../locales/translations.fr.js";
 
 var LANGUAGE_STORAGE_KEY = "lightbot_language";
-var FALLBACK_LANGUAGE = "en";
-var TRANSLATION_RESOURCES = {
-  en: {
-    translation: LIGHTBOT_TRANSLATIONS_EN,
-  },
-  de: {
-    translation: LIGHTBOT_TRANSLATIONS_DE,
-  },
-  fr: {
-    translation: LIGHTBOT_TRANSLATIONS_FR,
-  },
-};
+var FALLBACK_LANGUAGE = "pt-BR";
+var TRANSLATION_RESOURCES = { 'pt-BR': { translation: LIGHTBOT_TRANSLATIONS_PT_BR } };
 
 function applyTranslations() {
   document.querySelectorAll("[data-i18n]").forEach(function (element) {
@@ -34,6 +22,7 @@ function resolveLanguage(language) {
   if (!language) return null;
   // normalize "en-US" to "en" when we only have base language keys.
   var normalized = String(language).toLowerCase();
+  if (normalized === "pt-br" || normalized === "pt") return "pt-BR";
   if (TRANSLATION_RESOURCES[normalized]) return normalized;
   var shortCode = normalized.split("-")[0];
   if (TRANSLATION_RESOURCES[shortCode]) return shortCode;

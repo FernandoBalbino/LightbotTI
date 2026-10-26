@@ -83,3 +83,23 @@ test('high-density backing pixels do not change projection or board framing', ()
   assert.deepEqual(ctx.translations.at(-1), framing);
   assert.deepEqual(app.projection.project(50, 25, 50), projected);
 });
+
+test('wide gameplay surface uses its full area and a double-resolution backing without CSS shrink', () => {
+  globalThis.window.devicePixelRatio = 1;
+  const ctx = context();
+  const { app } = drawingModel(ctx);
+  app.fitCanvasToSurface = true;
+  app.renderPixelRatio = 2;
+  const canvas = { width: 620, height: 620, parentElement: { clientWidth: 784, clientHeight: 480 }, getContext: () => ctx };
+  canvasView(app, canvas);
+  app.draw();
+  assert.equal(canvas.width, 1568);
+  assert.equal(canvas.height, 960);
+  assert.deepEqual(ctx.transforms.at(-1), [2, 0, 0, 2, 0, 0]);
+  assert.equal(ctx.imageSmoothingQuality, 'high');
+  canvas.parentElement.clientWidth = 900;
+  canvas.parentElement.clientHeight = 560;
+  app.draw();
+  assert.equal(canvas.width, 1800);
+  assert.equal(canvas.height, 1120);
+});

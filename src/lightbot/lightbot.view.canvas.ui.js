@@ -137,7 +137,7 @@ export function createUi(params) {
       ui._setRenderLoopState(false);
 
       if (hist == null && ui.History) ui.History.pushState({ page: "welcomeScreen" });
-      document.title = "Lightbot - Welcome";
+      document.title = "Lightbot TI — Início";
 
       hideAllScreens();
       showScreen("welcomeScreen");
@@ -148,7 +148,7 @@ export function createUi(params) {
       ui._setRenderLoopState(false);
 
       if (hist == null && ui.History) ui.History.pushState({ page: "helpScreen" });
-      document.title = "Lightbot - Help";
+      document.title = "Lightbot TI — Ajuda";
 
       hideAllScreens();
       showScreen("helpScreen");
@@ -225,7 +225,7 @@ export function createUi(params) {
       if (list) list.scrollTop = 0;
 
       if (hist == null && ui.History) ui.History.pushState({ page: "achievementsScreen" });
-      document.title = "Lightbot - Achievements";
+      document.title = "Lightbot TI — Conquistas";
 
       hideAllScreens();
       showScreen("achievementsScreen");
@@ -277,11 +277,11 @@ export function createUi(params) {
         tile.type = "button";
         tile.className = "lb-level-tile" + (completed ? " lb-level-tile--completed" : "");
         tile.dataset.level = String(i);
-        tile.setAttribute("aria-label", i18next.t("levelSelectScreen.level", { number: i }) + ", " + i18next.t(statusKey));
+        tile.setAttribute("aria-label", i18next.t("levelSelectScreen.level", { number: String(i + 1).padStart(2, "0") }) + ", " + i18next.t(statusKey));
 
         var number = document.createElement("span");
         number.className = "level-number";
-        number.textContent = String(i);
+        number.textContent = String(i + 1).padStart(2, "0");
         tile.appendChild(number);
 
         var footer = document.createElement("span");
@@ -311,21 +311,22 @@ export function createUi(params) {
       if (levelList) levelList.scrollTop = 0;
 
       if (hist == null && ui.History) ui.History.pushState({ page: "levelSelectScreen" });
-      document.title = "Lightbot - Level Select";
+      document.title = "Lightbot TI — Fases";
 
       hideAllScreens();
       showScreen("levelSelectScreen");
     },
 
     showGameScreen: function (level, hist) {
+      if (!Number.isInteger(level) || level < 0 || level >= map.getNbrOfLevels()) { ui.showLevelSelectScreen(); return; }
       media.playGameAudio();
       // Load level data and reset model state for gameplay.
       map.loadMap(level);
 
       if (hist == null && ui.History) ui.History.pushState({ page: "gameScreen", level: level });
-      document.title = "Lightbot - Level " + level;
+      document.title = "Lightbot TI — Fase " + String(level + 1).padStart(2, "0");
       var levelTitle = document.getElementById("gameLevelTitle");
-      if (levelTitle) levelTitle.textContent = i18next.t("levelSelectScreen.level", { number: level });
+      if (levelTitle) levelTitle.textContent = i18next.t("levelSelectScreen.level", { number: String(level + 1).padStart(2, "0") });
 
       hideAllScreens();
 

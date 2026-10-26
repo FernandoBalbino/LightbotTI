@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html data-theme="lightbot">
+<html lang="pt-BR" data-theme="lightbot">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lightbot v1.4.0</title>
+  <title>Lightbot TI — Desafio do Robô</title>
   <link rel="shortcut icon" href="img/favicon.ico" />
   <script>
     (function () {
@@ -29,7 +29,7 @@
     <div id="welcomeScreen"
       class="lb-screen absolute top-5 inset-x-0 bottom-4 rounded-box shadow overflow-hidden bg-no-repeat bg-cover"
       style="background-image: url('img/welcome_screen_bg.png');">
-      <h1 class="sr-only">Lightbot</h1>
+      <h1 class="sr-only">Lightbot TI — Desafio do Robô</h1><p class="ti-welcome-title">TI — DESAFIO DO ROBÔ</p>
       <div class="welcome-panel">
         <button class="welcome-button levelSelectButton welcome-start">
           <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="fill-current">
@@ -55,7 +55,7 @@
             <span data-i18n="welcomeScreen.achievements"></span>
           </button>
           <button class="welcome-button audioToggleButton" data-i18n-title="welcomeScreen.toggleAudio"
-            title="Toggle audio">
+            title="Ativar ou desativar som">
             <svg aria-hidden="true" class="lb-audio-on hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path
                 d="M10.5 3.75a.75.75 0 0 0-1.264-.546L5.203 7H2.667a.75.75 0 0 0-.7.48A6.985 6.985 0 0 0 1.5 10c0 .887.165 1.737.468 2.52.111.29.39.48.7.48h2.535l4.033 3.796a.75.75 0 0 0 1.264-.546V3.75ZM16.45 5.05a.75.75 0 0 0-1.06 1.061 5.5 5.5 0 0 1 0 7.778.75.75 0 0 0 1.06 1.06 7 7 0 0 0 0-9.899Z" />
@@ -70,51 +70,46 @@
             <span class="sr-only" data-i18n="welcomeScreen.sound"></span>
           </button>
           <label for="languageSelect" class="sr-only" data-i18n="welcomeScreen.language"></label>
-          <select id="languageSelect" class="welcome-select"
-            data-i18n-title="welcomeScreen.language" title="Language">
-            <option value="en">English</option>
-            <option value="de">Deutsch</option>
-            <option value="fr">Français</option>
-          </select>
+          <select id="languageSelect" class="welcome-select" aria-label="Idioma"><option value="pt-BR">Português (Brasil)</option></select>
           <label for="themeSelect" class="sr-only" data-i18n="welcomeScreen.theme"></label>
-          <select id="themeSelect" data-i18n-title="welcomeScreen.theme" title="Theme" data-choose-theme class="welcome-select">
+          <select id="themeSelect" data-i18n-title="welcomeScreen.theme" title="Tema" data-choose-theme class="welcome-select">
             <option value="lightbot">Lightbot</option>
-            <option value="light">light</option>
-            <option value="dark">dark</option>
-            <option value="cupcake">cupcake</option>
-            <option value="bumblebee">bumblebee</option>
-            <option value="emerald">emerald</option>
-            <option value="corporate">corporate</option>
-            <option value="synthwave">synthwave</option>
-            <option value="retro">retro</option>
-            <option value="cyberpunk">cyberpunk</option>
-            <option value="valentine">valentine</option>
-            <option value="halloween">halloween</option>
-            <option value="garden">garden</option>
-            <option value="forest">forest</option>
-            <option value="aqua">aqua</option>
-            <option value="lofi">lofi</option>
-            <option value="pastel">pastel</option>
-            <option value="wireframe">wireframe</option>
-            <option value="black">black</option>
-            <option value="luxury">luxury</option>
-            <option value="dracula">dracula</option>
-            <option value="cmyk">cmyk</option>
-            <option value="autumn">autumn</option>
-            <option value="business">business</option>
-            <option value="acid">acid</option>
-            <option value="lemonade">lemonade</option>
-            <option value="night">night</option>
-            <option value="coffee">coffee</option>
-            <option value="winter">winter</option>
+            <option value="light">Claro</option>
+            <option value="dark">Escuro</option>
+            <option value="cupcake">Doce</option>
+            <option value="bumblebee">Abelha</option>
+            <option value="emerald">Esmeralda</option>
+            <option value="corporate">Corporativo</option>
+            <option value="synthwave">Ondas neon</option>
+            <option value="retro">Retrô</option>
+            <option value="cyberpunk">Cibernético</option>
+            <option value="valentine">Romântico</option>
+            <option value="halloween">Dia das bruxas</option>
+            <option value="garden">Jardim</option>
+            <option value="forest">Floresta</option>
+            <option value="aqua">Água</option>
+            <option value="lofi">Suave</option>
+            <option value="pastel">Pastel</option>
+            <option value="wireframe">Estrutural</option>
+            <option value="black">Preto</option>
+            <option value="luxury">Luxo</option>
+            <option value="dracula">Drácula</option>
+            <option value="cmyk">Cores de impressão</option>
+            <option value="autumn">Outono</option>
+            <option value="business">Negócios</option>
+            <option value="acid">Ácido</option>
+            <option value="lemonade">Limonada</option>
+            <option value="night">Noite</option>
+            <option value="coffee">Café</option>
+            <option value="winter">Inverno</option>
           </select>
         </div>
       </div>
       <div id="credits" class="welcome-credits">
-        Developed by <a href="http://www.haan.lu" target="_blank">Laurent Haan</a>. Interface by <a
-          href="http://www.zententia.net">Zenobia Homan</a>. Robot by <a
-          href="http://www.pixeljoint.com/forum/member_profile.asp?PF=2146">surt</a>. Music by <a
-          href="http://hektikmusic.newgrounds.com/" target="_blank">hektikmusic</a>. Original concept: <a
+        Desenvolvido por <a href="http://www.haan.lu" target="_blank">Laurent Haan</a>. Interface por <a
+          href="http://www.zententia.net">Zenobia Homan</a>. Robô por <a
+          href="http://www.pixeljoint.com/forum/member_profile.asp?PF=2146">surt</a>. Música por <a
+          href="http://hektikmusic.newgrounds.com/" target="_blank">hektikmusic</a>. Conceito original: <a
           href="http://lightbot.com/" target="_blank">lightbot.com</a>.
       </div>
     </div>
@@ -269,12 +264,12 @@
         <section class="game-board" aria-labelledby="gameLevelTitle">
           <header class="game-board-header">
             <h1 id="gameLevelTitle"></h1>
-            <div class="game-navigation"><button class="levelSelectButton lb-button game-back" data-i18n-title="gameScreen.back" title="Back">
+            <div class="game-navigation"><button class="levelSelectButton lb-button game-back" data-i18n-title="gameScreen.back" title="Voltar">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                 <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2Z" />
               </svg>
             <span data-i18n="levelSelectScreen.title"></span></button><button class="audioToggleButton lb-button" data-i18n-title="gameScreen.toggleAudio"
-              title="Toggle audio">
+              title="Ativar ou desativar som">
               <svg class="lb-audio-on hidden size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                 fill="currentColor">
                 <path
@@ -289,8 +284,15 @@
               </svg>
             </button></div>
           </header>
+          <section class="education-banner" aria-label="Desafio de informática">
+            <div class="education-heading"><strong id="educationCategory"></strong><button id="rerollButton" class="lb-button" type="button">Sortear novamente</button></div>
+            <p id="educationHint"></p>
+            <p class="education-goal">Encontre o item correto e depois acenda os quadrados azuis.</p>
+            <div class="education-progress"><span id="educationStatus"></span><span id="educationFeedback" role="status" aria-live="polite"></span></div>
+          </section>
+          <p id="boardDescription" class="sr-only"></p>
           <div id="canvasContainer">
-            <canvas id="gameCanvas" width="620" height="620" class="block"></canvas>
+            <canvas aria-label="Tabuleiro isométrico do robô" aria-describedby="boardDescription" id="gameCanvas" width="620" height="620" class="block"></canvas>
           </div>
         </section>
         <aside class="game-workspace">
@@ -305,7 +307,7 @@
                       <svg class="instruction-symbol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M12 20V4m-6 6 6-6 6 6" /></svg>
                       <span class="lb-instruction-label" data-i18n="gameScreen.commands.walk"></span>
                       <button type="button" class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
-                        data-i18n-title="gameScreen.remove" title="Remove">
+                        data-i18n-title="gameScreen.remove" title="Excluir comando">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                           <path
                             d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" />
@@ -318,7 +320,7 @@
                       <svg class="instruction-symbol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M5 20v-8a5 5 0 0 1 5-5h10m-5-5 5 5-5 5" /></svg>
                       <span class="lb-instruction-label" data-i18n="gameScreen.commands.turnRight"></span>
                       <button type="button" class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
-                        data-i18n-title="gameScreen.remove" title="Remove">
+                        data-i18n-title="gameScreen.remove" title="Excluir comando">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                           <path
                             d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" />
@@ -331,7 +333,7 @@
                       <svg class="instruction-symbol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M19 20v-8a5 5 0 0 0-5-5H4m5-5L4 7l5 5" /></svg>
                       <span class="lb-instruction-label" data-i18n="gameScreen.commands.turnLeft"></span>
                       <button type="button" class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
-                        data-i18n-title="gameScreen.remove" title="Remove">
+                        data-i18n-title="gameScreen.remove" title="Excluir comando">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                           <path
                             d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" />
@@ -344,7 +346,7 @@
                       <svg class="instruction-symbol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 18v-6a7 7 0 0 1 14 0v6m-4-4 4 4 4-4" /></svg>
                       <span class="lb-instruction-label" data-i18n="instructions.jump"></span>
                       <button type="button" class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
-                        data-i18n-title="gameScreen.remove" title="Remove">
+                        data-i18n-title="gameScreen.remove" title="Excluir comando">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                           <path
                             d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" />
@@ -357,7 +359,7 @@
                       <svg class="instruction-symbol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" stroke-linejoin="miter"><path d="m13 2-9 12h7l-1 8 10-12h-7z" /></svg>
                       <span class="lb-instruction-label" data-i18n="instructions.light"></span>
                       <button type="button" class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
-                        data-i18n-title="gameScreen.remove" title="Remove">
+                        data-i18n-title="gameScreen.remove" title="Excluir comando">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                           <path
                             d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" />
@@ -382,7 +384,7 @@
                         </span>
                       </span>
                       <button type="button" class="lb-instruction-delete btn btn-ghost btn-xs btn-square"
-                        data-i18n-title="gameScreen.remove" title="Remove">
+                        data-i18n-title="gameScreen.remove" title="Excluir comando">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4 fill-current">
                           <path
                             d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z" />
@@ -403,7 +405,7 @@
               <div class="game-program-header">
                 <h2 data-i18n="program.title"></h2>
                 <p id="gameRunStatus" class="game-hint" role="status" hidden></p>
-                <button id="clearButton" class="lb-button" data-i18n-title="gameScreen.clear" title="Clear">
+                <button id="clearButton" class="lb-button" data-i18n-title="gameScreen.clear" title="Limpar">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
                 <path fill-rule="evenodd"
                   d="M5 3.25V4H2.75a.75.75 0 0 0 0 1.5h.3l.815 8.15A1.5 1.5 0 0 0 5.357 15h5.285a1.5 1.5 0 0 0 1.493-1.35l.815-8.15h.3a.75.75 0 0 0 0-1.5H11v-.75A2.25 2.25 0 0 0 8.75 1h-1.5A2.25 2.25 0 0 0 5 3.25Zm2.25-.75a.75.75 0 0 0-.75.75V4h3v-.75a.75.75 0 0 0-.75-.75h-1.5ZM6.05 6a.75.75 0 0 1 .787.713l.275 5.5a.75.75 0 0 1-1.498.075l-.275-5.5A.75.75 0 0 1 6.05 6Zm3.9 0a.75.75 0 0 1 .712.787l-.275 5.5a.75.75 0 0 1-1.498-.075l.275-5.5a.75.75 0 0 1 .786-.711Z"
@@ -411,7 +413,10 @@
               </svg>
             <span data-i18n="gameScreen.clear"></span></button>
               </div>
-              <div class="droppable game-program-scroll">
+              <div id="accessibleEditor" class="ti-editor-tools" aria-label="Edição sem arrastar">
+              <div><button type="button" data-edit="up" aria-label="Mover comando para cima">↑</button><button type="button" data-edit="down" aria-label="Mover comando para baixo">↓</button><button type="button" data-edit="inside">Inserir dentro</button><button type="button" data-edit="out">Sair</button><button type="button" data-edit="main">Voltar ao programa</button></div>
+              <span id="editorTarget" role="status">Clique em uma linha para editar</span>
+            </div><div class="droppable game-program-scroll">
                 <ul id="mainProgram"></ul>
                 <p class="program-empty" data-i18n="instructions.placeholder"></p>
               </div>
@@ -419,7 +424,7 @@
           </div>
               <div id="buttonContainer" class="game-execution">
                 <button id="runButton" class="lb-button game-run" data-i18n-title="gameScreen.run"
-              title="Run">
+              title="Executar">
               <svg class="lb-run-icon size-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path d="M8 5v14l11-7-11-7Z" />
               </svg>
@@ -479,6 +484,7 @@
     </div>
   </dialog>
   </div>
+<span id="offlineStatus" class="ti-offline" role="status">Preparando recursos offline…</span>
 </body>
 
 </html>

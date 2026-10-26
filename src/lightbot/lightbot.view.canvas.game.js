@@ -38,7 +38,7 @@ export function canvasView(app, canvas) {
       }
     }
     // check if map has been completed here
-    if (lightBot.map.ready() && lightBot.map.state.allLightsOn()) {
+    if (lightBot.map.ready() && lightBot.map.state.isComplete()) {
 
       // stop the bot
       lightBot.bot.clearExecutionQueue();
@@ -66,10 +66,21 @@ export function canvasView(app, canvas) {
   function step() {
     lightBot.bot.step();
     lightBot.map.step();
+    if (lightBot.educationStep) lightBot.educationStep();
   }
 
   function draw() {
-    var pixelRatio = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+    // Match the world viewport to the displayed surface. A fixed 620-square backing
+    // shrinks the entire scene inside a short widescreen panel and resamples the robot.
+    var surface = lightBot.fitCanvasToSurface ? canvas.parentElement : null;
+    if (surface && surface.clientWidth > 0 && surface.clientHeight > 0 &&
+        (sceneWidth !== surface.clientWidth || sceneHeight !== surface.clientHeight)) {
+      sceneWidth = surface.clientWidth;
+      sceneHeight = surface.clientHeight;
+      lightBot.projection = new lightBot.Projection(sceneHeight, sceneWidth / 2, offsetY);
+      framedMap = null;
+    }
+    var pixelRatio = Math.max(lightBot.renderPixelRatio || 1, Math.min(3, window.devicePixelRatio || 1));
     var backingWidth = Math.round(sceneWidth * pixelRatio);
     var backingHeight = Math.round(sceneHeight * pixelRatio);
     if (canvas.width !== backingWidth || canvas.height !== backingHeight) {
@@ -77,6 +88,8 @@ export function canvasView(app, canvas) {
       canvas.height = backingHeight;
     }
     lightBot.ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    lightBot.ctx.imageSmoothingEnabled = true;
+    lightBot.ctx.imageSmoothingQuality = 'high';
     //clear main canvas
     lightBot.ctx.clearRect(0, 0, sceneWidth, sceneHeight);
 
@@ -84,7 +97,7 @@ export function canvasView(app, canvas) {
     if (!lightBot.map.getMapRef()) return;
     if (framedMap !== lightBot.map.getMapRef()) {
       framedMap = lightBot.map.getMapRef();
-      frame = getMapFrame(lightBot.map, lightBot.projection, sceneWidth, sceneHeight);
+      frame = getMapFrame(lightBot.map, lightBot.projection, sceneWidth, sceneHeight, surface ? 1.8 : 1);
     }
     lightBot.ctx.save();
     lightBot.ctx.translate(frame.x, frame.y);
@@ -96,6 +109,7 @@ export function canvasView(app, canvas) {
         for (var i = lightBot.map.getLevelSize().x - 1; i >= 0; i--) {
           for (var j = lightBot.map.getLevelSize().y - 1; j >= 0; j--) {
             lightBot.map.getMapRef()[i][j].draw();
+            if (lightBot.drawEducationTile) lightBot.drawEducationTile(i, j);
             if (lightBot.bot.currentPos.x === i && lightBot.bot.currentPos.y === j) {
               lightBot.bot.draw();
             }
@@ -106,6 +120,7 @@ export function canvasView(app, canvas) {
         for (i = lightBot.map.getLevelSize().x - 1; i >= 0; i--) {
           for (j = lightBot.map.getLevelSize().y - 1; j >= 0; j--) {
             lightBot.map.getMapRef()[i][j].draw();
+            if (lightBot.drawEducationTile) lightBot.drawEducationTile(i, j);
             switch (lightBot.bot.getAnimation().name) {
               case lightBot.bot.animations.jumpUp.name:
               case lightBot.bot.animations.jumpDown.name:
@@ -139,6 +154,7 @@ export function canvasView(app, canvas) {
         for (i = lightBot.map.getLevelSize().y - 1; i >= 0; i--) {
           for (j = lightBot.map.getLevelSize().x - 1; j >= 0; j--) {
             lightBot.map.getMapRef()[j][i].draw();
+            if (lightBot.drawEducationTile) lightBot.drawEducationTile(j, i);
             switch (lightBot.bot.getAnimation().name) {
               case lightBot.bot.animations.jumpUp.name:
               case lightBot.bot.animations.jumpDown.name:
@@ -172,6 +188,7 @@ export function canvasView(app, canvas) {
         for (i = lightBot.map.getLevelSize().y - 1; i >= 0; i--) {
           for (j = lightBot.map.getLevelSize().x - 1; j >= 0; j--) {
             lightBot.map.getMapRef()[j][i].draw();
+            if (lightBot.drawEducationTile) lightBot.drawEducationTile(j, i);
             if (lightBot.bot.currentPos.x === j && lightBot.bot.currentPos.y === i) {
               lightBot.bot.draw();
             }

@@ -1,7 +1,7 @@
 /** @type {import("eslint").Linter.FlatConfig[]} */
-module.exports = [
+export default [
   {
-    ignores: ["dist/**", "dist-web/**", "node_modules/**", "resources/**", "public/**"],
+    ignores: ["dist/**", "dist-web/**", "node_modules/**", "resources/**", "public/**", ".tools/**", "qa-evidence/**"],
   },
   {
     files: ["**/*.js"],
