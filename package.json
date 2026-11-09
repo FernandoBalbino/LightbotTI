@@ -21,13 +21,13 @@
     "preview:web": "vite preview --outDir dist-web --host 127.0.0.1 --port 43861"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.3.3",
+    "@tailwindcss/vite": "^4.3.4",
     "daisyui": "^5.7.50",
-    "eslint": "10.13.0",
-    "playwright": "^1.56.1",
-    "rimraf": "^6.1.2",
+    "eslint": "10.14.0",
+    "playwright": "^1.65.0",
+    "rimraf": "^6.1.4",
     "tailwindcss": "^4.3.3",
-    "vite": "^8.3.5",
+    "vite": "^8.3.6",
     "vite-plugin-singlefile": "^2.3.4"
   },
   "repository": {
@@ -39,7 +39,7 @@
   },
   "homepage": "https://fernandobalbino.github.io/LightbotTI/",
   "dependencies": {
-    "i18next": "^26.5.6",
+    "i18next": "^26.7.2",
     "sortablejs": "^1.15.6",
     "theme-change": "^3.0.4"
   },
